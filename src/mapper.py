@@ -1,5 +1,5 @@
 import numpy as np
-
+from scipy.special import erfc
 
 def qpsk_map(bits):
    
@@ -28,3 +28,8 @@ def awgn(x, snr_db):
         np.random.randn(*x.shape) + 1j * np.random.randn(*x.shape)
     )
     return x + noise
+
+def qpsk_ber_theory(eb_n0_db):
+   
+    eb_n0 = 10 ** (np.asarray(eb_n0_db, dtype=float) / 10)
+    return 0.5 * erfc(np.sqrt(eb_n0))
